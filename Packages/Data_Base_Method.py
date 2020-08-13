@@ -112,6 +112,41 @@ class LocalDBMethods():
         except Error as e:
             print(e)
 
+
+    def insert_non_exist_row_database_multi_rows(self,table_name, column_list, rows_values):
+        """
+                insert a new values into the table
+                :param conn: local db connection
+                :param table_name: the table which have the target information
+                :param column_list: the columns of the table
+                :param row_values:
+                :return: project id
+                """
+        try:
+            sql = ''' INSERT OR IGNORE INTO %s (''' % table_name
+
+            for i in range(len(column_list)):
+                if i < len(column_list) - 1:
+                    sql = sql + column_list[i] + ','
+                else:
+                    sql = sql + column_list[i]
+
+            sql = sql + ') VALUES ('
+
+            for i in range(len(column_list)):
+                if i < len(column_list) - 1:
+                    sql = sql + '?,'
+                else:
+                    sql = sql + '?);'
+            # print(sql)
+            c = self.conn.cursor()
+            c.executemany(sql, rows_values)
+            self.conn.commit()
+            c.close()
+            return c.lastrowid
+        except Error as e:
+            print(e)
+
     # FIXME: 현재 REPLACE 문은 따로 테스트 해 보지는 않았다. 추후 오류가 발생 되면 여기항목을 수정하기 바람
     def replace_database_multi_rows(self, table_name, column_list, rows_values):
         """

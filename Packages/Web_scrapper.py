@@ -57,10 +57,10 @@ class Scrap_DB(LocalDBMethods):
     def create_basic_table(self):
 
         create_table_sql = """CREATE TABLE IF NOT EXISTS news_titles(
-                               id integer PRIMARY KEY AUTOINCREMENT,
+                               notify_check integer,
                                days text,
                                headline text,
-                               news_link text,
+                               news_link text PRIMARY KEY,
                                etc text)
                                """
 
