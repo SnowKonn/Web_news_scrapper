@@ -7,4 +7,4 @@
  3. Python 관련 package 설치 후 python 실행
  
 ## 업데이트 내용
- - 2020-08-13: 네이버 증시 주요 뉴스를 Headline과 함께 url을 notify로 보내주도록 
+ - 2020-08-13: 네이버 증시 주요 뉴스를 Headline과 함께 url을 notify로 보내주도록 변경 
